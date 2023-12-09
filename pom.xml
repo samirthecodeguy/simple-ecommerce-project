@@ -134,6 +134,11 @@
 			<groupId>org.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.cache/cache-api -->
+		<dependency>
+			<groupId>javax.cache</groupId>
+			<artifactId>cache-api</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>
@@ -153,7 +158,8 @@
 						src/main/resources/liquibase.properties
 					</propertyFile>
 					<outputChangeLogFile>
-						src/main/resources/db/changelog/generated.mariadb.sql</outputChangeLogFile>
+						src/main/resources/db/changelog/generated.mariadb.sql
+					</outputChangeLogFile>
 				</configuration>
 			</plugin>
 

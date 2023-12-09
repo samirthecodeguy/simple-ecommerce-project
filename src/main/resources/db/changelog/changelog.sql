@@ -84,3 +84,20 @@ ALTER TABLE user_authority ADD CONSTRAINT FKpqlsjpkybgos9w2svcri7j8xy FOREIGN KE
 -- changeset mrx:1701893939943-28
 ALTER TABLE product ADD CONSTRAINT FKqx9wikktsev17ctu0kcpkrafc FOREIGN KEY (category) REFERENCES category (id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
+
+
+-- changeset mrx:insert_users
+INSERT INTO user (id, username, password_hash, first_name, last_name, email, image_url, activated, created_by, last_modified_by, created_date)
+VALUES (1, 'admin', '$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC', 'Administrator', 'Administrator', 'admin@localhost', NULL, true, 'system', 'system', NOW()),
+       (2, 'user', '$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K', 'User', 'User', 'user@localhost', NULL, true, 'system', 'system', NOW());
+
+-- changeset mrx:insert_authorities
+INSERT INTO authority (name) VALUES
+('ROLE_ADMIN'),
+('ROLE_USER');
+
+-- changeset mrx:insert_user_authority
+INSERT INTO user_authority (user_id, authority_name) VALUES
+(1, 'ROLE_ADMIN'),
+(1, 'ROLE_USER'),
+(2, 'ROLE_USER');

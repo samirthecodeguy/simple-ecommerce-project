@@ -10,7 +10,9 @@ import com.starter.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	
-	@Cacheable(value="usersByUsername", key="#usrnmauth")
+	String USERS_BY_USERNAME_CACHE = "usersByUsername";
+
+	@Cacheable(cacheNames=USERS_BY_USERNAME_CACHE)
 	Optional<User> findOneWithAuthoritiesByUsername(String login);
 	
 	Optional<User> findByUsername(String username);
