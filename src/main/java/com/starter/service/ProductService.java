@@ -1,10 +1,22 @@
 package com.starter.service;
 
-import com.starter.domain.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.starter.dto.AdminProductDTO;
+import com.starter.dto.ProductDTO;
 
 public interface ProductService {
 	
-	public Product findByName(String name);
+	ProductDTO getProductById(Long id);
 	
+	Page<ProductDTO> findProductsByCategory(Pageable pageable, String category);
+
+	Page<ProductDTO> getAllProductsPageable(Pageable pageable);
 	
+	AdminProductDTO createProduct(AdminProductDTO productDTO);
+	
+	AdminProductDTO updateProduct(AdminProductDTO productDTO);
+	
+	void deleteProduct(Long id);
 }

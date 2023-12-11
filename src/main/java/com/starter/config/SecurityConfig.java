@@ -42,6 +42,7 @@ public class SecurityConfig {
 				.requestMatchers("/api/account/reset-password/finish").permitAll()
 				.requestMatchers("/api/admin/**").hasAuthority("admin")
 				.requestMatchers("/swagger-ui/**","/api-docs/**").hasAuthority(AuthoritiesConstants.ADMIN)
+				.requestMatchers( HttpMethod.GET,"/api/products/**").permitAll()
 				.requestMatchers("/api/**").authenticated()
 				.anyRequest().permitAll())
 		;
