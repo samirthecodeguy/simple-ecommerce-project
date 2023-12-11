@@ -2,6 +2,12 @@ package com.starter.domain;
 
 import java.math.BigDecimal;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.starter.dto.AdminProductDTO;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,15 +18,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Product extends AbstractAuditingEntity {
 
 	@Id
@@ -28,11 +38,11 @@ public class Product extends AbstractAuditingEntity {
 	private long id;
 
 	@Column(name = "barcode", nullable = true)
-	@NotNull
 	private String barcode;
 
 	@Column(name = "name", nullable = false)
 	@NotNull
+	@NotBlank
 	private String name;
 
 	@Lob
@@ -50,13 +60,14 @@ public class Product extends AbstractAuditingEntity {
 	private BigDecimal costPrice;
 
 	@Column(nullable = false)
-	private Integer stockQuantity;
+	private int stockQuantity;
 
 	@Column(nullable = false)
-	private Integer lowStockThreshold;
+	private int lowStockThreshold;
 
 	@ManyToOne
 	@JoinColumn(name = "category", nullable = true)
+	@JsonIgnore
 	private Category category;
-
+	
 }
