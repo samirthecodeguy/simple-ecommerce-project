@@ -1,5 +1,8 @@
 package com.starter.domain;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +17,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Category {
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +28,9 @@ public class Category {
 	@Column(name = "name", nullable = false)
 	@NotNull
 	private String name;
+	
+	public Category(String categoryName) {
+		this.name = categoryName;
+	}
 
 }
