@@ -1,1 +1,1 @@
-# spring-boot-starter
+# /simple-ecommerce-project
